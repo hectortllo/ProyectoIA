@@ -20,14 +20,14 @@ def predict(file):
 	resultado = arreglo[0]
 	respuesta = np.argmax(resultado)
 	if respuesta == 0:
-		print "Inmadura"
+		print ("Inmadura")
 	elif respuesta == 1:
-		print "Madura"
+		print ("Madura")
 	elif respuesta == 2:
-		print "Podrida"
+		print ("Podrida")
 	elif respuesta == 3:
-		print "Proceso-maduracion"
+		print ("Proceso-maduracion")
 	elif respuesta == 4:
-		print "semi-madura"
+		print ("semi-madura")
 
 predict('fresa5.jpg')
