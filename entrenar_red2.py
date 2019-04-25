@@ -9,8 +9,8 @@ from tensorflow.python.keras import backend as k
 
 k.clear_session()
 
-data_entrenamiento_red1 = './data/red1/entrenamiento'
-data_validacion_red1 = './data/red1/validacion'
+data_entrenamiento_red2 = './data/red2/entrenamiento'
+data_validacion_red2 = './data/red2/validacion'
 
 epocas = 20
 altura, longitud = 100, 100
@@ -19,11 +19,10 @@ pasos = 1000
 pasos_validacion = 200
 filtrosConv1 = 32
 filtrosConv2 = 64
-filtrosConv3 = 128
 tamanio_filtro1 = (3,3)
 tamanio_filtro2 = (2,2)
 tamanio_pool = (2,2)
-clases = 4 #numero de frutas existentes
+clases = 5 #numero de frutas existentes
 lr = 0.0005 #constante de aprendizaje
 
 #Pre-procesamiento de imagenes
@@ -38,22 +37,21 @@ validacion_datagen = ImageDataGenerator(
 	rescale = 1./255
 )
 
-imagen_entrenamiento_red1 = entrenamiento_datagen.flow_from_directory(
-	data_entrenamiento_red1,
+imagen_entrenamiento_red2 = entrenamiento_datagen.flow_from_directory(
+	data_entrenamiento_red2,
 	target_size = (altura, longitud),
 	batch_size = batch_size,
 	class_mode = 'categorical'
 )
 
-imagen_validacion_red1 = validacion_datagen.flow_from_directory(
-	data_validacion_red1,
+imagen_validacion_red2 = validacion_datagen.flow_from_directory(
+	data_validacion_red2,
 	target_size = (altura, longitud),
 	batch_size = batch_size,
 	class_mode = 'categorical'
 )
 
-#Crear la red
-def entrenamiento_red1():
+def entrenamiento_red2():
 	cnn = Sequential()
 	cnn.add(Convolution2D(filtrosConv1, tamanio_filtro1, padding='same', input_shape=(altura, longitud, 3), activation='relu'))
 	cnn.add(MaxPooling2D(pool_size=tamanio_pool))
@@ -65,12 +63,12 @@ def entrenamiento_red1():
 	cnn.add(Dense(clases, activation='softmax'))
 	cnn.compile(loss='categorical_crossentropy', optimizer=optimizers.Adam(lr=lr), metrics=['accuracy'])
 
-	cnn.fit_generator(imagen_entrenamiento_red1, steps_per_epoch=pasos, epochs=epocas, validation_data=imagen_validacion_red1, validation_steps=pasos_validacion)
-	dir='./modelo/red1/'
+	cnn.fit_generator(imagen_entrenamiento_red2, steps_per_epoch=pasos, epochs=epocas, validation_data=imagen_validacion_red2, validation_steps=pasos_validacion)
+	dir='./modelo/red2/'
 
 	if not os.path.exists(dir):
 		os.mkdir(dir)
-	cnn.save('./modelo/red1/modelo.h5')
-	cnn.save_weights('./modelo/red1/pesos.h5')
+	cnn.save('./modelo/red2/modelo.h5')
+	cnn.save_weights('./modelo/red2/pesos.h5')
 
-entrenamiento_red1()
+entrenamiento_red2()

@@ -1,4 +1,4 @@
-#Librerías a utilizar.
+#Librerias a utilizar.
 from tkinter import *
 from tkinter import filedialog
 from PIL import Image
