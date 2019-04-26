@@ -57,10 +57,16 @@ def entrenamiento_red2():
 	cnn.add(MaxPooling2D(pool_size=tamanio_pool))
 	cnn.add(Convolution2D(filtrosConv2, tamanio_filtro2, padding='same', activation='relu'))
 	cnn.add(MaxPooling2D(pool_size=tamanio_pool))
-	cnn.add(Flatten())
+	#Teniendo una imagen con muchas capas, ahora la vamos a aplanar
+	cnn.add(Flatten()) 
+	#Despues de aplanar las imagenes, se conectan las capas
 	cnn.add(Dense(256,activation='relu'))
+	#A la capa densa, se le van a ir apagando el 50% de las neuronas con cada paso,
+	#esto se hace para evitar el sobre-ajuste
 	cnn.add(Dropout(0.5))
+	#Se hace la conexion con la capa de salida
 	cnn.add(Dense(clases, activation='softmax'))
+	#Parametros para optimizar el algoritmo
 	cnn.compile(loss='categorical_crossentropy', optimizer=optimizers.Adam(lr=lr), metrics=['accuracy'])
 
 	cnn.fit_generator(imagen_entrenamiento_red2, steps_per_epoch=pasos, epochs=epocas, validation_data=imagen_validacion_red2, validation_steps=pasos_validacion)

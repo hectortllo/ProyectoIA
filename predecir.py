@@ -4,7 +4,7 @@ from keras.models import load_model
 from keras.utils import CustomObjectScope
 from keras.initializers import glorot_uniform
 
-archivo = 'fresa4.jpg'
+archivo = 'fresa1.jpg'
 longitud, altura = 100, 100
 modelo_red1 = './modelo/red1/modelo.h5'
 pesos_red1 = './modelo/red1/pesos.h5'
