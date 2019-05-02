@@ -19,7 +19,6 @@ pasos = 1000
 pasos_validacion = 200
 filtrosConv1 = 32
 filtrosConv2 = 64
-filtrosConv3 = 128
 tamanio_filtro1 = (3,3)
 tamanio_filtro2 = (2,2)
 tamanio_pool = (2,2)
